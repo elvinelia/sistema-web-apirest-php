@@ -102,7 +102,7 @@
 
   <div class="contact-card">
     <h2>Contáctame</h2>
-    <p>Si deseas colaborar, tienes preguntas o simplemente quieres saludar, encuéntrame en mis redes:</p>
+    <p>Si deseas colaborar, tienes preguntas o me quieres contratar, encuéntrame en mis redes:</p>
     <div class="text-center">
       <a href="https://www.linkedin.com/in/elvin-elias-vinicio-lugo-1925692b4/" target="_blank" class="btn-contact primary me-3">LinkedIn</a>
       <a href="https://github.com/elvinelia" target="_blank" class="btn-contact success">GitHub</a>
