@@ -1,3 +1,4 @@
+<?php include '../navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,121 +6,39 @@
   <title>API de Género (Genderize.io)</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
+   /* Tu CSS aquí */
    :root {
-  --primary-color: #0d6efd;
-  --secondary-color: #6c757d;
-  --success-color: #198754;
-  --danger-color: #dc3545;
-  --warning-color: #ffc107;
-  --info-color: #0dcaf0;
-  --light-color: #f8f9fa;
-  --dark-color: #212529;
-  --gradient-primary: linear-gradient(135deg,rgb(48, 62, 124) 0%,rgb(37, 39, 107) 100%);
-  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-  --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
-  --border-radius: 12px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Reset y base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+    --gradient-primary: linear-gradient(135deg,rgb(48, 62, 124) 0%,rgb(37, 39, 107) 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+    --border-radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+    body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: var(--dark-color);
-  background: linear-gradient(135deg,rgb(38, 45, 78) 0%,rgb(158, 160, 241) 100%);
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.3), rgba(233, 78, 119, 0.3)), 
+              radial-gradient(circle at 20% 80%, rgba(55, 53, 126, 0.2), transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.2), transparent 50%);
+  background-blend-mode: screen;
+  background-attachment: fixed;
   min-height: 100vh;
+  padding-top: 80px; /* deja espacio si el navbar es fijo */
+  margin: 0;
   position: relative;
-}
-
-/* Navbar */
-.navbar {
-  background: rgba(13, 110, 253, 0.95) !important;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: var(--shadow-lg);
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-
-.navbar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s;
-}
-
-.navbar:hover::before {
-  left: 100%;
-}
-
-.navbar-brand {
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: white !important;
-  text-decoration: none;
-  position: relative;
-  transition: var(--transition);
-}
-
-.navbar-brand::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--gradient-success);
-  transition: width 0.3s ease;
-}
-
-.navbar-brand:hover::after {
-  width: 100%;
-}
-
-.nav-link {
-  color: rgba(255, 255, 255, 0.9) !important;
-  font-weight: 500;
-  padding: 0.75rem 1rem !important;
-  border-radius: 8px;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-
-.nav-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  transition: left 0.3s ease;
-  z-index: -1;
-}
-
-.nav-link:hover {
-  color: white !important;
-  transform: translateY(-2px);
-}
-
-.nav-link:hover::before {
-  left: 0;
 }
 
 
@@ -127,8 +46,6 @@ body {
 </head>
 <body>
 
-
-<?php include '../navbar.php'; ?>
 <div class="container mt-4">
   <h2 class="mb-3">API de Género (Genderize.io)</h2>
 
@@ -145,10 +62,23 @@ body {
 
   function getGenderizeData($name) {
       $url = "https://api.genderize.io/?name=" . urlencode($name);
-      $response = @file_get_contents($url);
-      if ($response === FALSE) {
-          return null;
+
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      // Para pruebas rápidas sin SSL (no recomendado en producción)
+      // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+      $response = curl_exec($ch);
+
+      if ($response === false) {
+          $error = curl_error($ch);
+          curl_close($ch);
+          return ['error' => $error];
       }
+
+      curl_close($ch);
       return json_decode($response, true);
   }
 
@@ -156,10 +86,21 @@ body {
     $name = trim($_GET['name']);
     $data = getGenderizeData($name);
 
-    if ($data && isset($data['gender']) && $data['gender'] !== null) {
+    if (isset($data['error'])) {
+      echo "<div class='alert alert-danger'>Error en la consulta: " . htmlspecialchars($data['error']) . "</div>";
+    } elseif ($data && isset($data['gender']) && $data['gender'] !== null) {
       echo "<div class='alert alert-info'>";
       echo "<p><strong>Nombre:</strong> " . htmlspecialchars($data['name']) . "</p>";
-      echo "<p><strong>Género:</strong> " . htmlspecialchars($data['gender']) . "</p>";
+
+      // Mostrar "Es hombre" o "Es mujer"
+      if ($data['gender'] === 'male') {
+        echo "<p><strong>Género:</strong> Es hombre 💙</p>";
+      } elseif ($data['gender'] === 'female') {
+        echo "<p><strong>Género:</strong> Es mujer 💖 </p>";
+      } else {
+        echo "<p><strong>Género:</strong> " . htmlspecialchars($data['gender']) . "</p>";
+      }
+
       echo "<p><strong>Probabilidad:</strong> " . htmlspecialchars($data['probability']) . "</p>";
       echo "</div>";
     } else {
