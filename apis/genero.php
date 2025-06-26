@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>API de Género (Genderize.io)</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/estilos.css" />
   <style>
    :root {
   --primary-color: #0d6efd;
@@ -128,8 +127,7 @@ body {
 </head>
 <body>
 
-<?php include 'navbar.php'; ?>
-
+<?php include '../navbar.php'; ?>
 <div class="container mt-4">
   <h2 class="mb-3">API de Género (Genderize.io)</h2>
 
