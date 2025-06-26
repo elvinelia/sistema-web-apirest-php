@@ -127,6 +127,7 @@ body {
 </head>
 <body>
 
+
 <?php include '../navbar.php'; ?>
 <div class="container mt-4">
   <h2 class="mb-3">API de Género (Genderize.io)</h2>
@@ -143,19 +144,12 @@ body {
   ini_set('display_errors', 1);
 
   function getGenderizeData($name) {
-    $url = "https://api.genderize.io/?name=" . urlencode($name);
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-    $response = curl_exec($ch);
-
-    if (curl_errno($ch)) {
-      curl_close($ch);
-      return null;
-    }
-
-    curl_close($ch);
-    return json_decode($response, true);
+      $url = "https://api.genderize.io/?name=" . urlencode($name);
+      $response = @file_get_contents($url);
+      if ($response === FALSE) {
+          return null;
+      }
+      return json_decode($response, true);
   }
 
   if (isset($_GET['name'])) {
